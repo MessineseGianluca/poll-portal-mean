@@ -6,6 +6,8 @@
 'use strict';
 import Thing from '../api/thing/thing.model';
 import User from '../api/user/user.model';
+import Poll from '../api/poll/poll.model';
+
 
 Thing.find({}).remove()
   .then(() => {
@@ -52,6 +54,19 @@ User.find({}).remove()
       name: 'Admin',
       email: 'admin@example.com',
       password: 'admin'
+    })
+  });
+
+Poll.find({}).remove()
+  .then(() => {
+    Poll.create({
+      title: 'Tipical families in UK',
+      start_date: Date.now(),
+      end_date: Date.now()
+    }, {
+      title: 'Tipical families in Italy',
+      start_date: Date.now(),
+      end_date: Date.now()
     })
     .then(() => {
       console.log('finished populating users');
