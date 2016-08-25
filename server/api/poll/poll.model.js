@@ -4,19 +4,16 @@ import mongoose from 'mongoose';
 
 var OptionSchema = new mongoose.Schema({
   text: {type: String, max: 255},
-  counter: { type: Number, default: 0 } //autoincrement field
-  /*For incrementing counter field:
-   *counter.findByIdAndUpdate({_id: 'entityId'}, {$inc: { seq: 1} });
-   */
 });
 
 var AnswerSchema = new mongoose.Schema({
-  content: {type: String, max: 255}
+  content: {type: String, max: 255},
+  option_id: {type: mongoose.Schema.Types.ObjectId, ref: 'Option'}
 });
 
 var QuestionSchema = new mongoose.Schema({
   text: {type: String, max: 255},
-  type: {type: String, max: 1}, //a=opened , b=single answer, c=multiple answer
+  type: {type: String, max: 1},
   options: [OptionSchema],
   answers: [AnswerSchema]
 });
