@@ -20,7 +20,8 @@ var UserSchema = new Schema({
     required: true
   },
   provider: String,
-  salt: String
+  salt: String,
+  polls: [{type: mongoose.Schema.Types.ObjectId, ref: 'Poll'}]
 });
 
 /**
