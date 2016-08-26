@@ -16,7 +16,7 @@ router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 
 
 /* Questions */
-//router.get('/polls/:id/questions', auth.hasRole('admin'), controller.showQuestions);
+router.get('/polls/:id/questions', auth.hasRole('admin'), controller.showQuestions);
 //router.get('/polls/:id/questions/:id', auth.hasRole('admin'), controller.showSingleQuestion);
 //router.post('/polls/:id/questions', auth.hasRole('admin'), controller.createQuestion);
 //router.put('/polls/:id/questions/:id', auth.hasRole('admin'), controller.updateQuestion);

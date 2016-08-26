@@ -86,10 +86,14 @@ export function update(req, res) {
     .catch(handleError(res));
 }
 
-// Deletes a Thing from the DB
+// Delete a Poll from the DB
 export function destroy(req, res) {
-  return Thing.findById(req.params.id).exec()
+  return Poll.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
+}
+
+export function showQuestions(req, res) {
+  return Poll.findById(req.params.id).exec().questions;
 }
