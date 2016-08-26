@@ -95,5 +95,7 @@ export function destroy(req, res) {
 }
 
 export function showQuestions(req, res) {
-  return Poll.findById(req.params.id).exec().questions;
+  return Poll.findById(req.params.id).select('-_id questions').exec()
+    .then(respondWithResult(res))
+    .catch(handleError(res));
 }
