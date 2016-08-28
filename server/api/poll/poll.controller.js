@@ -2,6 +2,7 @@
 
 import jsonpatch from 'fast-json-patch';
 import Poll from './poll.model';
+var mongoose = require('mongoose');
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -98,4 +99,15 @@ export function showQuestions(req, res) {
   return Poll.findById(req.params.id).select('-_id questions').exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
+}
+
+export function showSingleQuestion(req, res) {
+  return Poll.aggregate(
+    {$match: {_id: mongoose.Types.ObjectId(req.params.pollId)}},
+    {$unwind: '$questions'},
+    {$match: {'questions._id': mongoose.Types.ObjectId(req.params.quesId)}},
+    {$project : {_id: 0, question: "$questions"}}
+  ).then(respondWithResult(res))
+   .catch(handleError(res));
+
 }

@@ -62,7 +62,16 @@ Poll.find({}).remove()
     Poll.create({
       title: 'Tipical families in UK',
       start_date: Date.now(),
-      end_date: Date.now()
+      end_date: Date.now(),
+      questions: [
+        {
+          text: 'blablabla?',
+          type: 'a'
+        }, {
+          text: 'blablabla',
+          type: 'b'
+        }
+      ]
     }, {
       title: 'Tipical families in Italy',
       start_date: Date.now(),
