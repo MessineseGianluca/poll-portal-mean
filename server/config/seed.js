@@ -66,7 +66,14 @@ Poll.find({}).remove()
       questions: [
         {
           text: 'blablabla?',
-          type: 'a'
+          type: 'a',
+          options: [
+            {
+              text: "your father"
+            }, {
+              text: "your mother"
+            }
+          ]
         }, {
           text: 'blablabla',
           type: 'b'

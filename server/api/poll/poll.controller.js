@@ -109,5 +109,15 @@ export function showSingleQuestion(req, res) {
     {$project : {_id: 0, question: "$questions"}}
   ).then(respondWithResult(res))
    .catch(handleError(res));
+}
 
+export function showOptions(req, res) {
+  return Poll.aggregate(
+    {$match: {_id: mongoose.Types.ObjectId(req.params.pollId)}},
+    {$unwind: '$questions'},
+    {$match: {'questions._id': mongoose.Types.ObjectId(req.params.quesId)}},
+    {$unwind: '$questions.options'},
+    {$project : {_id: 0, option: "$questions.options"}}
+  ).then(respondWithResult(res))
+   .catch(handleError(res));
 }
