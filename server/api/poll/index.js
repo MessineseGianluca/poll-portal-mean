@@ -23,7 +23,7 @@ router.get('/:pollId/questions/:quesId', /*auth.hasRole('admin'),*/ controller.s
 
 /* Options */
 router.get('/:pollId/questions/:quesId/options', /*auth.hasRole('admin'),*/ controller.showOptions);
-//router.get('/:id/questions/:id/options/:id', auth.hasRole('admin'), controller.showOption);
+router.get('/:pollId/questions/:quesId/options/:optId', /*auth.hasRole('admin'),*/ controller.showSingleOption);
 //router.post('/:id/questions/:id/options', auth.hasRole('admin'), controller.createOption);
 //router.put('/:id/questions/:id/options/:id', auth.hasRole('admin'), controller.updateOption);
 //router.delete('/:id/questions/:id/options/:id', auth.hasRole('admin'), controller.destroyOption);
