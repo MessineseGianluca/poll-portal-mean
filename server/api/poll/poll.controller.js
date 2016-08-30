@@ -97,6 +97,7 @@ export function destroy(req, res) {
 
 export function showQuestions(req, res) {
   return Poll.findById(req.params.id).select('-_id questions').exec()
+    .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -107,9 +108,21 @@ export function showSingleQuestion(req, res) {
     {$unwind: '$questions'},
     {$match: {'questions._id': mongoose.Types.ObjectId(req.params.quesId)}},
     {$project : {_id: 0, question: "$questions"}}
-  ).then(respondWithResult(res))
+  ).then(handleEntityNotFound(res))
+   .then(respondWithResult(res))
    .catch(handleError(res));
 }
+
+/*export function destroyQuestion(req, res) {
+  return Poll.aggregate(
+    {$match: {_id: mongoose.Types.ObjectId(req.params.pollId)}},
+    {$unwind: '$questions'},
+    {$match: {'questions._id': mongoose.Types.ObjectId(req.params.quesId)}},
+    {$project : {_id: 0, question: "$questions"}}
+  ).then(handleEntityNotFound(res))
+   .then(removeEntity(res))
+   .catch(handleError(res));
+}*/
 
 export function showOptions(req, res) {
   return Poll.aggregate(
