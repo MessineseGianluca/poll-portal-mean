@@ -122,6 +122,30 @@ export function createQuestion(req, res) {
       .catch(handleError(res));
 }
 
+export function updateQuestion(req, res) {
+  if(req.body.text && req.body.type) {
+    var updates =  {
+      "questions.$.text": req.body.text,
+      "questions.$.type": req.body.type
+    }
+  } else if(!req.body.type) {
+    var updates =  {
+      "questions.$.text": req.body.text
+    }
+  } else {
+    var updates =  {
+      "questions.$.type": req.body.type
+    }
+  }
+
+  return Poll.update(
+    { _id: req.params.pollId, "questions._id": req.params.quesId },
+    { $set: updates } )
+      .then(handleEntityNotFound(res))
+      .then(respondWithResult(res))
+      .catch(handleError(res));
+}
+
 export function destroyQuestion(req, res) {
   return Poll.update(
     { _id: req.params.pollId },
@@ -161,7 +185,6 @@ export function createOption(req, res) {
       .then(handleEntityNotFound(res))
       .then(respondWithResult(res))
       .catch(handleError(res));
-
 }
 
 export function destroyOption(req, res) {

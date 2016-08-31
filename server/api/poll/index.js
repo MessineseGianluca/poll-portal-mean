@@ -18,14 +18,14 @@ router.delete('/:id', /*auth.hasRole('admin'),*/ controller.destroy);
 router.get('/:id/questions', /*auth.hasRole('admin'),*/ controller.showQuestions);
 router.get('/:pollId/questions/:quesId', /*auth.hasRole('admin'),*/ controller.showSingleQuestion);
 router.post('/:id/questions', /*auth.hasRole('admin'),*/ controller.createQuestion);
-//router.put('/:id/questions/:id', auth.hasRole('admin'), controller.updateQuestion);
+router.put('/:pollId/questions/:quesId', /*auth.hasRole('admin'),*/ controller.updateQuestion);
 router.delete('/:pollId/questions/:quesId', /*auth.hasRole('admin'),*/ controller.destroyQuestion);
 
 /* Options */
 router.get('/:pollId/questions/:quesId/options', /*auth.hasRole('admin'),*/ controller.showOptions);
 router.get('/:pollId/questions/:quesId/options/:optId', /*auth.hasRole('admin'),*/ controller.showSingleOption);
 router.post('/:pollId/questions/:quesId/options', /*auth.hasRole('admin'),*/ controller.createOption);
-//router.put('/:id/questions/:id/options/:id', auth.hasRole('admin'), controller.updateOption);
+//router.put('/:pollId/questions/:quesId/options/:optId', auth.hasRole('admin'), controller.updateOption);
 router.delete('/:pollId/questions/:quesId/options/:optId', /*auth.hasRole('admin'),*/ controller.destroyOption);
 
 module.exports = router;
