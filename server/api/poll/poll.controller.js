@@ -144,3 +144,12 @@ export function showSingleOption(req, res) {
   ).then(respondWithResult(res))
    .catch(handleError(res));
 }
+
+export function destroyOption(req, res) {
+  var questions = Poll.update(
+    {_id: req.params.pollId, "questions._id": req.params.quesId},
+    { $pull: {"questions.$.options": {_id: req.params.optId} } } )
+      .then(handleEntityNotFound(res))
+      .then(respondWithResult(res))
+      .catch(handleError(res));
+}

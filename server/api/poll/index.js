@@ -26,6 +26,6 @@ router.get('/:pollId/questions/:quesId/options', /*auth.hasRole('admin'),*/ cont
 router.get('/:pollId/questions/:quesId/options/:optId', /*auth.hasRole('admin'),*/ controller.showSingleOption);
 //router.post('/:id/questions/:id/options', auth.hasRole('admin'), controller.createOption);
 //router.put('/:id/questions/:id/options/:id', auth.hasRole('admin'), controller.updateOption);
-//router.delete('/:id/questions/:id/options/:id', auth.hasRole('admin'), controller.destroyOption);
+router.delete('/:pollId/questions/:quesId/options/:optId', /*auth.hasRole('admin'),*/ controller.destroyOption);
 
 module.exports = router;
