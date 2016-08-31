@@ -113,16 +113,14 @@ export function showSingleQuestion(req, res) {
    .catch(handleError(res));
 }
 
-/*export function destroyQuestion(req, res) {
-  return Poll.aggregate(
-    {$match: {_id: mongoose.Types.ObjectId(req.params.pollId)}},
-    {$unwind: '$questions'},
-    {$match: {'questions._id': mongoose.Types.ObjectId(req.params.quesId)}},
-    {$project : {_id: 0, question: "$questions"}}
-  ).then(handleEntityNotFound(res))
-   .then(removeEntity(res))
-   .catch(handleError(res));
-}*/
+export function destroyQuestion(req, res) {
+  return Poll.update(
+    {_id: req.params.pollId},
+    { $pull: {questions: {_id: req.params.quesId} } } )
+      .then(handleEntityNotFound(res))
+      .then(respondWithResult(res))
+      .catch(handleError(res));
+}
 
 export function showOptions(req, res) {
   return Poll.aggregate(
