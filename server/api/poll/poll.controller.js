@@ -115,13 +115,18 @@ export function showSingleQuestion(req, res) {
 
 export function createQuestion(req, res) {
 
-
+  return Poll.update(
+    { _id: req.params.id },
+    { $push: { questions: req.body } } )
+      .then(handleEntityNotFound(res))
+      .then(respondWithResult(res))
+      .catch(handleError(res));
 }
 
 export function destroyQuestion(req, res) {
   return Poll.update(
-    {_id: req.params.pollId},
-    { $pull: {questions: {_id: req.params.quesId} } } )
+    { _id: req.params.pollId },
+    { $pull: { questions: { _id: req.params.quesId } } } )
       .then(handleEntityNotFound(res))
       .then(respondWithResult(res))
       .catch(handleError(res));
@@ -152,7 +157,7 @@ export function showSingleOption(req, res) {
 
 export function destroyOption(req, res) {
   return Poll.update(
-    {_id: req.params.pollId, "questions._id": req.params.quesId},
+    { _id: req.params.pollId, "questions._id": req.params.quesId },
     { $pull: {"questions.$.options": {_id: req.params.optId} } } )
       .then(handleEntityNotFound(res))
       .then(respondWithResult(res))

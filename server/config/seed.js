@@ -57,7 +57,7 @@ User.find({}).remove()
     })
   });
 
-Poll.find({}).remove()
+/*Poll.find({}).remove()
   .then(() => {
     Poll.create({
       title: 'Tipical families in UK',
@@ -87,4 +87,4 @@ Poll.find({}).remove()
     .then(() => {
       console.log('finished populating users');
     });
-  });
+  });*/
