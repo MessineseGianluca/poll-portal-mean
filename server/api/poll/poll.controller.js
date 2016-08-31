@@ -114,7 +114,6 @@ export function showSingleQuestion(req, res) {
 }
 
 export function createQuestion(req, res) {
-
   return Poll.update(
     { _id: req.params.id },
     { $push: { questions: req.body } } )
@@ -153,6 +152,16 @@ export function showSingleOption(req, res) {
     {$project : {_id: 0, option: "$questions.options"}}
   ).then(respondWithResult(res))
    .catch(handleError(res));
+}
+
+export function createOption(req, res) {
+  return Poll.update(
+    { _id: req.params.pollId, "questions._id": req.params.quesId },
+    { $push: { "questions.$.options": req.body } } )
+      .then(handleEntityNotFound(res))
+      .then(respondWithResult(res))
+      .catch(handleError(res));
+
 }
 
 export function destroyOption(req, res) {
