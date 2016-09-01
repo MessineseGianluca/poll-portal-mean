@@ -187,6 +187,26 @@ export function createOption(req, res) {
       .catch(handleError(res));
 }
 
+export function updateOption(req, res) {
+  Poll.findById(req.params.pollId, function(err, poll) {
+    var question;
+    var option;
+    for(question in poll.questions) {
+      if(poll.questions[question]._id == req.params.quesId) {
+        for(option in poll.questions[question].options) {
+          if(poll.questions[question].options[option]._id == req.params.optId) {
+            poll.questions[question].options[option].text = req.body.text;
+          }
+        }
+      }
+    }
+    poll.save();
+  })
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
 export function destroyOption(req, res) {
   return Poll.update(
     { _id: req.params.pollId, "questions._id": req.params.quesId },
