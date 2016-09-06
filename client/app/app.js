@@ -21,7 +21,7 @@ import account from './account';
 import admin from './admin';
 import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
-import main from './main/main.component';
+import welcome from './welcome/welcome.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 
@@ -33,7 +33,7 @@ angular.module('pollPortalMeanApp', [
     // ngMessages,
 
     // ngValidationMatch,
-    _Auth, account, admin, navbar, footer, main, constants, util
+    _Auth, account, admin, navbar, footer, welcome, constants, util
   ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {

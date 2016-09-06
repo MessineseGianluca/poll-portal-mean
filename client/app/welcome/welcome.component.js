@@ -1,11 +1,11 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import routing from './main.routes';
+import routing from './welcome.routes';
 
-export class MainController {
+export class WelcomeController {
 
   /*@ngInject*/
-  constructor($http) {
+  /*constructor($http) {
     this.$http = $http;
   }
 
@@ -27,13 +27,13 @@ export class MainController {
 
   deleteThing(thing) {
     this.$http.delete('/api/things/' + thing._id);
-  }
+  }*/
 }
 
 export default angular.module('pollPortalMeanApp.main', [uiRouter])
   .config(routing)
-  .component('main', {
-    template: require('./main.html'),
-    controller: MainController
+  .component('welcome', {
+    template: require('./welcome.html'),
+    controller: WelcomeController
   })
   .name;
