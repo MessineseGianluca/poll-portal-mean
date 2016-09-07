@@ -1,1 +1,4 @@
-<h1>That's a dashboard</h1>
+<h1 class="title"><small>Polls:<small></h1>
+<ul ng-repeat="poll in $ctrl.polls">
+  <li><a href="#" uib-tooltip="{{poll.start_date}}">{{poll.title}}</a></li>
+</ul>

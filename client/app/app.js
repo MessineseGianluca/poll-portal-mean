@@ -22,7 +22,7 @@ import admin from './admin';
 import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
 import welcome from './welcome/welcome.component';
-import dashboard from './dashboard';
+import dashboard from './dashboard/dashboard.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 
