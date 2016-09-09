@@ -26,9 +26,11 @@ export class DashboardController {
       var incomingPolls = new Array();
       // looping through polls
       for(var poll of polls) {
-        if(poll.endDate <= Date()) {
+        var end = new Date(poll.endDate).getTime();
+        var start = new Date(poll.startDate).getTime();
+        if(end < Date.now()) {
           closedPolls.push(poll);
-        } else if(poll.startDate <= Date()) {
+        } else if(start < Date.now()) {
           openedPolls.push(poll);
         } else {
           incomingPolls.push(poll);
@@ -42,7 +44,7 @@ export class DashboardController {
       }
       this.openedPolls = openedPolls;
       this.closedPolls = closedPolls;
-      this.incomingedPolls = incomingPolls;
+      this.incomingPolls = incomingPolls;
       this.answeredPolls = answeredPolls;
     });
   }

@@ -54,7 +54,7 @@ User.find({}).remove()
       name: 'Admin',
       email: 'admin@example.com',
       password: 'admin',
-      polls: ['57d170726e97ce30129c349d', '57d170726e97ce30129c3498']
+      polls: ['57d2e7233c6a7e4419780aa9', '57d2e7233c6a7e4419780aa4']
     })
   });
 
@@ -62,7 +62,7 @@ User.find({}).remove()
   .then(() => {
     Poll.create({
       title: 'Tipical families in UK',
-      startDate: Date.now(),
+      startDate: Date(),
       endDate: Date.now(),
       questions: [
         {
@@ -82,8 +82,8 @@ User.find({}).remove()
       ]
     }, {
       title: 'Tipical families in Italy',
-      startDate: Date.now(),
-      endDate: Date.now()
+      startDate: Date(),
+      endDate: Date()
     })
     .then(() => {
       console.log('finished populating users');
