@@ -9,9 +9,9 @@ var router = express.Router();
 /* Polls */
 router.get('/', /*auth.isAuthenticated(),*/ controller.index);
 router.get('/:id', /*auth.isAuthenticated(),*/ controller.show);
-router.post('/', auth.hasRole('admin'), controller.create);
+router.post('/', /*auth.hasRole('admin'),*/ controller.create);
 //router.post('/:id/answer', auth.isAuthenticated(), controller.answerPoll);
-router.put('/:id', auth.hasRole('admin'), controller.update);
+router.put('/:id', /*auth.hasRole('admin'),*/ controller.upsert);
 router.delete('/:id', /*auth.hasRole('admin'),*/ controller.destroy);
 
 /* Questions */

@@ -74,15 +74,15 @@ export function create(req, res) {
     .catch(handleError(res));
 }
 
-// Updates an existing Thing in the DB
-export function update(req, res) {
-  //delete id from the request(because id is autocatically provided)
+export function upsert(req, res) {
   if(req.body._id) {
     delete req.body._id;
   }
-  return Poll.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(patchUpdates(req.body))
+  return Poll.findOneAndUpdate(
+    req.params.id,
+    req.body,
+    {upsert: true, setDefaultsOnInsert: true, runValidators: true}
+  ).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
