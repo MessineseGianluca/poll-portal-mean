@@ -6,16 +6,45 @@ import routing from './dashboard.routes';
 export class DashboardController {
 
   /*@ngInject*/
-  constructor($http) {
+  constructor($http, $q) {
     this.$http = $http;
+    this.$q = $q;
   }
 
   $onInit() {
-    this.$http.get('/api/polls')
-      .then(response => {
-        //console.log(response.data);
-        this.polls = response.data;
-      });
+    this.$q.all([
+      this.$http.get('/api/polls'),
+      this.$http.get('/api/users/me'),
+    ]).then(response => {
+      // get all polls
+      var polls = response[0].data;
+      //get the polls answered by the logged user
+      var joins = response[1].data.polls;
+      var closedPolls = new Array();
+      var openedPolls = new Array();
+      var answeredPolls = new Array();
+      var incomingPolls = new Array();
+      // looping through polls
+      for(var poll of polls) {
+        if(poll.endDate <= Date()) {
+          closedPolls.push(poll);
+        } else if(poll.startDate <= Date()) {
+          openedPolls.push(poll);
+        } else {
+          incomingPolls.push(poll);
+        }
+        // Check if the user has answered the current poll
+        for(var join of joins) {
+          if(join == poll._id) {
+            answeredPolls.push(poll);
+          }
+        }
+      }
+      this.openedPolls = openedPolls;
+      this.closedPolls = closedPolls;
+      this.incomingedPolls = incomingPolls;
+      this.answeredPolls = answeredPolls;
+    });
   }
 /*
   addThing() {

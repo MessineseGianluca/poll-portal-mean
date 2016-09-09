@@ -8,6 +8,7 @@ import ngSanitize from 'angular-sanitize';
 
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
+
 // import ngMessages from 'angular-messages';
 //import ngValidationMatch from 'angular-validation-match';
 
