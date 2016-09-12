@@ -1,3 +1,33 @@
-.title {
-  text-align: center;
+.poll-container {
+  background-color: #EFEFEF;
+  border-radius: 4px;
+  width: 80%;
+  margin: auto;
+  padding: 20px 0px;
+}
+
+.poll-container a {
+  font-weight: bold;
+}
+
+h3 small {
+  margin-left: 10%;
+}
+
+a {
+  color: #0099cc;
+}
+
+
+ul {
+  list-style: none;
+}
+
+.last {
+  margin-bottom: 40px;
+}
+
+.none {
+  margin: 0px 40px;
+  font-weight: bold;
 }

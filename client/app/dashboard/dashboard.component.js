@@ -41,6 +41,9 @@ export class DashboardController {
             answeredPolls.push(poll);
           }
         }
+        /* Edit Date in such a readable format */
+        poll.endDate = new Date(poll.endDate).toUTCString();
+        poll.startDate = new Date(poll.endDate).toUTCString();
       }
       this.openedPolls = openedPolls;
       this.closedPolls = closedPolls;
