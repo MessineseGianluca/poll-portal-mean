@@ -46,6 +46,7 @@
 @import 'admin/admin.css';
 @import 'dashboard/dashboard.css';
 @import 'welcome/welcome.css';
+@import 'answer/answer.css';
 @import '../components/footer/footer.css';
 @import '../components/modal/modal.css';
 /* endinject */
