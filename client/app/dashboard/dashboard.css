@@ -10,6 +10,10 @@
   font-weight: 600;
 }
 
+.alert-message {
+  margin-left: 10%;
+}
+
 h3 small {
   margin-left: 10%;
 }

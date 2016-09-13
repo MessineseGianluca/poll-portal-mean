@@ -1,1 +1,13 @@
-<p>That's an answer page</p>
+<div class="container">
+  <div class="row">
+    <h1><small>{{$ctrl.poll.title}}</small></h1>
+    <ul ng-repeat='question in $ctrl.poll.questions'>
+      <li>
+        <h2><small>{{question.text}}</small></h2>
+        <ul ng-repeat='option in question.options'>
+          <li>{{option.text}}</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

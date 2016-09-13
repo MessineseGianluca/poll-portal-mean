@@ -1,34 +1,40 @@
-<h3><small>Opened Polls:</small></h3>
-<div class="poll-container row">
-  <ul ng-repeat="poll in $ctrl.openedPolls" ng-hide="$ctrl.openedPolls == ''">
-    <li>
-      <a href="/answer/{{poll._id}}" uib-tooltip="Started on: {{poll.startDate}}">{{poll.title}}</a>
-    </li>
-  </ul>
-  <p class="none" ng-show="$ctrl.openedPolls == ''">None</p>
-</div>
-<h3><small>Closed Polls:</small></h3>
-<div class="poll-container row">
-  <ul ng-repeat="poll in $ctrl.closedPolls" ng-hide="$ctrl.closedPolls == ''">
-    <li>
-      <a href="#" uib-tooltip="Closed on: {{poll.endDate}}">{{poll.title}}</a>
-    </li>
-  </ul>
-  <p class="none" ng-show="$ctrl.closedPolls == ''">None</p>
-</div>
-<h3><small>Incoming Polls:</small></h3>
-<div class="poll-container row">
-  <ul ng-repeat="poll in $ctrl.incomingPolls" ng-hide="$ctrl.incomingPolls == ''">
-    <li>
-      <a href="#" uib-tooltip="Will start on: {{poll.startDate}}">{{poll.title}}</a>
-    </li>
-  </ul>
-  <p class="none" ng-show="$ctrl.incomingPolls == ''">None</p>
-</div>
-<h3><small>Answered Polls:</small></h3>
-<div class="poll-container row last">
-  <ul ng-repeat="poll in $ctrl.answeredPolls" ng-hide="$ctrl.answeredPolls == ''">
-    <li><a href="#">{{poll.title}}</a></li>
-  </ul>
-  <p class="none" ng-show="$ctrl.answeredPolls == ''">None</p>
+<div class="container">
+  <p class="alert-message">{{$ctrl.alertMessage}}</p>
+  <h3><small>Opened Polls:</small></h3>
+  <div class="poll-container row">
+    <ul ng-repeat="poll in $ctrl.openedPolls" ng-hide="$ctrl.openedPolls == ''">
+      <li>
+        <a ng-click='$ctrl.clickOpened(poll._id)'
+           href="#" uib-tooltip="Started on: {{poll.startDate}}">
+          {{poll.title}}
+        </a>
+      </li>
+    </ul>
+    <p class="none" ng-show="$ctrl.openedPolls == ''">None</p>
+  </div>
+  <h3><small>Closed Polls:</small></h3>
+  <div class="poll-container row">
+    <ul ng-repeat="poll in $ctrl.closedPolls" ng-hide="$ctrl.closedPolls == ''">
+      <li>
+        <a href="#" uib-tooltip="Closed on: {{poll.endDate}}">{{poll.title}}</a>
+      </li>
+    </ul>
+    <p class="none" ng-show="$ctrl.closedPolls == ''">None</p>
+  </div>
+  <h3><small>Incoming Polls:</small></h3>
+  <div class="poll-container row">
+    <ul ng-repeat="poll in $ctrl.incomingPolls" ng-hide="$ctrl.incomingPolls == ''">
+      <li>
+        <a href="#" uib-tooltip="Will start on: {{poll.startDate}}">{{poll.title}}</a>
+      </li>
+    </ul>
+    <p class="none" ng-show="$ctrl.incomingPolls == ''">None</p>
+  </div>
+  <h3><small>Answered Polls:</small></h3>
+  <div class="poll-container row last">
+    <ul ng-repeat="poll in $ctrl.answeredPolls" ng-hide="$ctrl.answeredPolls == ''">
+      <li><a href="#">{{poll.title}}</a></li>
+    </ul>
+    <p class="none" ng-show="$ctrl.answeredPolls == ''">None</p>
+  </div>
 </div>

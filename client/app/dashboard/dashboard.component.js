@@ -14,11 +14,12 @@ export class DashboardController {
   $onInit() {
     this.$q.all([
       this.$http.get('/api/polls'),
-      this.$http.get('/api/users/me'),
-    ]).then(response => {
+      this.$http.get('/api/users/me')
+    ])
+      .then(response => {
       // get all polls
       var polls = response[0].data;
-      //get the polls answered by the logged user
+      //get the id of the polls answered by the logged user
       var joins = response[1].data.polls;
       var closedPolls = new Array();
       var openedPolls = new Array();
@@ -45,25 +46,21 @@ export class DashboardController {
         poll.endDate = new Date(poll.endDate).toUTCString();
         poll.startDate = new Date(poll.endDate).toUTCString();
       }
+      this.myAnsweredPollsId = joins;
       this.openedPolls = openedPolls;
       this.closedPolls = closedPolls;
       this.incomingPolls = incomingPolls;
       this.answeredPolls = answeredPolls;
     });
   }
-/*
-  addThing() {
-    if (this.newThing) {
-      this.$http.post('/api/things', {
-        name: this.newThing
-      });
-      this.newThing = '';
+
+  clickOpened(id) {
+    for(var pollId of this.myAnsweredPollsId) {
+      if(pollId == id) {
+        this.alertMessage = "You have already answered this poll.";
+      }
     }
   }
-
-  deleteThing(thing) {
-    this.$http.delete('/api/things/' + thing._id);
-  }*/
 }
 
 export default angular.module('pollPortalMeanApp.dashboard', [uiRouter])
