@@ -21,10 +21,21 @@ export class AnswerController {
         var pollToAnswer = response[0].data;
         var pollsAnsweredByUser = response[1].data.polls;
         for(var pollId of pollsAnsweredByUser) {
-          if(pollId == pollToAnswer._id)
-            this.$window.location.href = '/dashboard';
+          /*if(pollId == pollToAnswer._id)
+            this.$window.location.href = '/dashboard';*/
         }
         this.poll = pollToAnswer;
+        this.answers = new Array();
+        var i = 0;
+        for(var question of this.poll.questions) {
+          var obj = {
+                      quesId: question._id,
+                      type: question.type,
+                      content: ""
+                    };
+          this.answers.push(obj);
+        }
+        console.log(this.answers);
       });
   }
 /*

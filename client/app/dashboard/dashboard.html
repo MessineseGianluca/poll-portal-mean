@@ -32,7 +32,8 @@
   </div>
   <h3><small>Answered Polls:</small></h3>
   <div class="poll-container row last">
-    <ul ng-repeat="poll in $ctrl.answeredPolls" ng-hide="$ctrl.answeredPolls == ''">
+    <ul ng-repeat="poll in $ctrl.answeredPolls"
+        ng-hide="$ctrl.answeredPolls == ''">
       <li><a href="#">{{poll.title}}</a></li>
     </ul>
     <p class="none" ng-show="$ctrl.answeredPolls == ''">None</p>

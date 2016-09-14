@@ -1,4 +1,16 @@
-.alert-message {
-  font-weight: 600;
-  color: red;
+ul {
+  list-style: none;
+}
+
+.poll-name {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+ul.options {
+  padding: 3px 10px;
+}
+
+.checkbox-text {
+  vertical-align: 2px;
 }
