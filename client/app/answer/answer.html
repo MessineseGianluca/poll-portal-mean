@@ -3,28 +3,36 @@
     <h1 class="poll-name"><small>{{$ctrl.poll.title}}</small></h1>
     <form name="pollForm">
       <ul class="questions"
-          ng-repeat='(quesKey, question) in $ctrl.poll.questions'
-          ng-init="questionIndex = $index">
+          ng-repeat='question in $ctrl.poll.questions'
+          ng-init="quesIndex = $index">
         <li>
           <h2><small>{{question.text}}</small></h2>
           <textarea ng-if="question.type == 'a'"
                     ng-model="$ctrl.answers[$index].content"
                     ng-maxlength="255"
                     ng-minlength="1"
+                    class="form-control"
                     placeholder="Insert your answer here..."></textarea>
           <ul class="options"
               ng-if="question.type == 'b' || question.type == 'c'"
               ng-repeat='option in question.options'>
-            <li ng-if="question.type == 'b'">
-              <input type="radio"
-                     ng-model="$ctrl.answers[questionIndex].content"
-                     ng-value="option._id">{{option.text}}
+            <li class="radio" ng-if="question.type == 'b'">
+              <label>
+                <input type="radio"
+                       ng-model="$ctrl.answers[quesIndex].content"
+                       ng-value="option._id">
+                {{option.text}}
+              </label>
             </li>
             <li ng-if="question.type == 'c'">
-              <input type="checkbox"
-                     ng-init="optId = option._id"
-                     ng-model="$ctrl.answers[questionIndex].content[$index]">
-              <span class="checkbox-text">{{option.text}}</span>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"
+                         ng-init="optId = option._id"
+                         ng-model="$ctrl.answers[quesIndex].content[$index]">
+                  {{option.text}}
+                </label>
+              </div>
             </li>
           </ul>
         </li>

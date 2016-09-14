@@ -1,5 +1,6 @@
 ul {
   list-style: none;
+  padding: 0 40px;
 }
 
 .poll-name {
@@ -11,6 +12,10 @@ ul.options {
   padding: 3px 10px;
 }
 
-.checkbox-text {
-  vertical-align: 2px;
+.checkbox, .radio {
+  margin: 0;
+}
+
+.checkbox input:focus, .radio input:focus {
+  outline: none;
 }
