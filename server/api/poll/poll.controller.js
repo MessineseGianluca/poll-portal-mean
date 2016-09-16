@@ -96,7 +96,7 @@ export function destroy(req, res) {
 }
 
 export function showQuestions(req, res) {
-  return Poll.findById(req.params.id).select('-_id questions').exec()
+  return Poll.findById(req.params.pollId).select('-_id questions').exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -115,7 +115,7 @@ export function showSingleQuestion(req, res) {
 
 export function createQuestion(req, res) {
   return Poll.update(
-    { _id: req.params.id },
+    { _id: req.params.pollId },
     { $push: { questions: req.body } } )
       .then(handleEntityNotFound(res))
       .then(respondWithResult(res))
@@ -137,7 +137,6 @@ export function updateQuestion(req, res) {
       "questions.$.type": req.body.type
     }
   }
-
   return Poll.update(
     { _id: req.params.pollId, "questions._id": req.params.quesId },
     { $set: updates } )

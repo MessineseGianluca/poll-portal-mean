@@ -31,13 +31,52 @@ export class AnswerController {
           var obj = {
                       quesId: question._id,
                       type: question.type,
-                      content: ""
+                      content: []
                     };
+          if(question.type == 'c') {
+            for(var index in question.options) {
+              obj.content.push({
+                value: false,
+                optionId: question.options[index]._id
+              });
+            }
+          }
           this.answers.push(obj);
         }
         console.log(this.answers);
       });
   }
+
+  submitAnswers() {
+    var i = 0;
+    for(var question of this.answers) {
+      if(question.type == 'a') {
+        var content = {content: question.content};
+        this.poll.questions[i].answers.push(content);
+      } else if(question.type == 'b') {
+        var optId = {optionId: question.content};
+        this.poll.questions[i].answers.push(optId)
+      } else {
+        for(var index in question.content) {
+          if(question.content[index].value) {
+            var optId = {optionId: question.content[index].optionId};
+            this.poll.questions[i].answers.push(optId);
+          }
+        }
+      }
+      i++;
+    }
+    console.log(this.poll);
+    /*this.$http.put('/api/polls/' + this.poll._id, this.poll)
+      .then(response => {
+        console.log(response);
+      });*/
+
+    /* Here http put request for
+     * adding poll_id inside the
+     * answered polls array of the user */
+  }
+
 /*
   addThing() {
     if (this.newThing) {

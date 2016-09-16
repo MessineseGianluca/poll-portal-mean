@@ -1,42 +1,44 @@
 <div class="container">
   <div class="row">
     <h1 class="poll-name"><small>{{$ctrl.poll.title}}</small></h1>
-    <form name="pollForm">
-      <ul class="questions"
-          ng-repeat='question in $ctrl.poll.questions'
-          ng-init="quesIndex = $index">
-        <li>
-          <h2><small>{{question.text}}</small></h2>
-          <textarea ng-if="question.type == 'a'"
-                    ng-model="$ctrl.answers[$index].content"
-                    ng-maxlength="255"
-                    ng-minlength="1"
-                    class="form-control"
-                    placeholder="Insert your answer here..."></textarea>
-          <ul class="options"
-              ng-if="question.type == 'b' || question.type == 'c'"
-              ng-repeat='option in question.options'>
-            <li class="radio" ng-if="question.type == 'b'">
+    <ul class="questions"
+        ng-repeat='question in $ctrl.poll.questions'
+        ng-init="quesIndex = $index">
+      <li>
+        <h2><small>{{question.text}}</small></h2>
+        <textarea ng-if="question.type == 'a'"
+                  ng-model="$ctrl.answers[$index].content"
+                  ng-maxlength="255"
+                  ng-minlength="1"
+                  class="form-control"
+                  placeholder="Insert your answer here..."></textarea>
+        <ul class="options"
+            ng-if="question.type == 'b' || question.type == 'c'"
+            ng-repeat='option in question.options'>
+          <li ng-if="question.type == 'b'">
+            <div class="radio">
               <label>
                 <input type="radio"
                        ng-model="$ctrl.answers[quesIndex].content"
-                       ng-value="option._id">
+                       ng-value="option._id"
+                       required>
                 {{option.text}}
               </label>
-            </li>
-            <li ng-if="question.type == 'c'">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox"
-                         ng-init="optId = option._id"
-                         ng-model="$ctrl.answers[quesIndex].content[$index]">
-                  {{option.text}}
-                </label>
-              </div>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </form>
+            </div>
+          </li>
+          <li ng-if="question.type == 'c'">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"
+                       ng-model="$ctrl.answers[quesIndex].content[$index].value"
+                       required>
+                {{option.text}}
+              </label>
+            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <button ng-click="$ctrl.submitAnswers()">Submit</button>
   </div>
 </div>
