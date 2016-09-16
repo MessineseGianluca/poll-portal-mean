@@ -78,8 +78,10 @@ export function upsert(req, res) {
   if(req.body._id) {
     delete req.body._id;
   }
+  console.log(req.body);
+  console.log(req.params.id);
   return Poll.findOneAndUpdate(
-    req.params.id,
+    { "_id" : req.params.id },
     req.body,
     {upsert: true, setDefaultsOnInsert: true, runValidators: true}
   ).exec()

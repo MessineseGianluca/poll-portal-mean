@@ -43,7 +43,6 @@ export class AnswerController {
           }
           this.answers.push(obj);
         }
-        console.log(this.answers);
       });
   }
 
@@ -67,10 +66,11 @@ export class AnswerController {
       i++;
     }
     console.log(this.poll);
-    /*this.$http.put('/api/polls/' + this.poll._id, this.poll)
+    delete this.poll.__v;
+    this.$http.put('/api/polls/' + this.poll._id, this.poll)
       .then(response => {
         console.log(response);
-      });*/
+      });
 
     /* Here http put request for
      * adding poll_id inside the

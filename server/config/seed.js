@@ -57,17 +57,20 @@ User.find({}).remove()
       polls: ['57d2e7233c6a7e4419780aa9', '57d2e7233c6a7e4419780aa4']
     })
   });
-
-/*Poll.find({}).remove()
+/*
+Poll.find({}).remove()
   .then(() => {
     Poll.create({
       title: 'Tipical families in UK',
       startDate: Date(),
-      endDate: Date.now(),
+      endDate: Date(),
       questions: [
         {
-          text: 'blablabla?',
-          type: 'a',
+          text: 'What about your home?',
+          type: 'a'
+        }, {
+          text: 'Who does work in your family?',
+          type: 'c',
           options: [
             {
               text: "your father"
@@ -76,14 +79,51 @@ User.find({}).remove()
             }
           ]
         }, {
-          text: 'blablabla',
-          type: 'b'
+          text: 'How many people live in your house?',
+          type: 'b',
+          options: [
+            {
+              text: '1'
+            },{
+              text: 'more than 1'
+            }
+          ]
         }
       ]
     }, {
-      title: 'Tipical families in Italy',
+      title: 'Tipical teenagers habits.',
       startDate: Date(),
-      endDate: Date()
+      endDate: Date(),
+      questions: [
+        {
+          text: 'What about your tipical day?',
+          type: 'a'
+        }, {
+          text: 'Do you play videogames?',
+          type: 'b',
+          options: [
+            {
+              text: "yes"
+            }, {
+              text: "no"
+            }
+          ]
+        }, {
+          text: 'Which activity do you hate between those listed belove?',
+          type: 'c',
+          options: [
+            {
+              text: 'sport'
+            }, {
+              text: 'going out'
+            }, {
+              text: 'playing videogames'
+            }, {
+              text: 'none'
+            }
+          ]
+        }
+      ]
     })
     .then(() => {
       console.log('finished populating users');
