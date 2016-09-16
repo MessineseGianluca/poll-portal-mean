@@ -8,7 +8,8 @@ var OptionSchema = new mongoose.Schema({
 
 var AnswerSchema = new mongoose.Schema({
   content: {type: String, max: 255},
-  optionId: {type: mongoose.Schema.Types.ObjectId, ref: 'Option'}
+  optionId: {type: mongoose.Schema.Types.ObjectId, ref: 'Option'},
+  counter: {type: Number, default: 0},
 });
 
 var QuestionSchema = new mongoose.Schema({
@@ -19,7 +20,8 @@ var QuestionSchema = new mongoose.Schema({
 });
 
 var PollSchema = new mongoose.Schema({
-  title: { type: String, max: 255 },
+  joins: {type: Number, default: 0},
+  title: {type: String, max: 255},
   startDate: Date,
   endDate: Date,
   questions: [QuestionSchema]

@@ -53,24 +53,47 @@ export class AnswerController {
         var content = {content: question.content};
         this.poll.questions[i].answers.push(content);
       } else if(question.type == 'b') {
-        var optId = {optionId: question.content};
-        this.poll.questions[i].answers.push(optId)
+        var index = _.findIndex(this.poll.questions[i].answers, function(o) {
+          return o.optionId == question.content;
+        });
+        // If answer has never been choosen before
+        if(index == -1) {
+          var obj = {
+            optionId: question.content,
+            counter: 1,
+          };
+          this.poll.questions[i].answers.push(obj);
+        } else {
+          //Increment existing counter
+          this.poll.questions[i].answers[index].counter += 1;
+        }
       } else {
         for(var index in question.content) {
           if(question.content[index].value) {
-            var optId = {optionId: question.content[index].optionId};
-            this.poll.questions[i].answers.push(optId);
+            var answerIndex = _.findIndex(
+              this.poll.questions[i].answers, function(o) {
+                return o.optionId == question.content[index].optionId;
+            });
+            // If answer has never been choosen before
+            if(answerIndex == -1) {
+              var obj = {
+                optionId: question.content[index].optionId,
+                counter: 1,
+              };
+              this.poll.questions[i].answers.push(obj);
+            } else {
+              /*Increment existing counter*/
+              this.poll.questions[i].answers[answerIndex].counter += 1;
+            }
           }
         }
       }
       i++;
     }
-    console.log(this.poll);
+    //Increment the number of joins
+    this.poll.joins += 1;
     delete this.poll.__v;
-    this.$http.put('/api/polls/' + this.poll._id, this.poll)
-      .then(response => {
-        console.log(response);
-      });
+    this.$http.put('/api/polls/' + this.poll._id, this.poll);
 
     /* Here http put request for
      * adding poll_id inside the
