@@ -47,6 +47,7 @@
 @import 'answer/answer.css';
 @import 'dashboard/dashboard.css';
 @import 'welcome/welcome.css';
+@import 'show/show.css';
 @import '../components/footer/footer.css';
 @import '../components/modal/modal.css';
 /* endinject */
