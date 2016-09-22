@@ -1,0 +1,9 @@
+.poll-name span {
+  color: #0099cc;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+ul {
+  padding: 0 20px;
+}

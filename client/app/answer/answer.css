@@ -27,4 +27,5 @@ ul.options {
 .error {
   color: red;
   font-weight: 600;
+  margin-left: 20px;
 }

@@ -5,7 +5,7 @@ import routing from './show.routes';
 export class ShowController {
 
   /*@ngInject*/
-  constructor($http, $q, $stateParams, $window, Auth) {
+  constructor($http, $q, $stateParams, $window) {
     this.$http = $http;
     this.$q = $q;
     this.$stateParams = $stateParams;
@@ -13,7 +13,10 @@ export class ShowController {
   }
 
   $onInit() {
-    this.message = "That's a show page";
+    this.$http.get('/api/polls/' + this.$stateParams.pollId)
+      .then(response => {
+        this.poll = response.data;
+      });
   }
 }
 

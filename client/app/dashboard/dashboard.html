@@ -16,7 +16,7 @@
   <div class="poll-container row">
     <ul ng-repeat="poll in $ctrl.closedPolls" ng-hide="$ctrl.closedPolls == ''">
       <li>
-        <a ng-click='$ctrl.clickClosed(poll._id)'
+        <a ng-click='$ctrl.clickClosed(poll._id, poll.joins)'
            href="#"
            uib-tooltip="Closed on: {{poll.endDate}}">
            {{poll.title}}

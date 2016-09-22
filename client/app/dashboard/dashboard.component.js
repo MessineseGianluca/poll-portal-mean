@@ -68,9 +68,13 @@ export class DashboardController {
       }
     }
   }
-  clickClosed(id) {
+  clickClosed(id, joins) {
     //CurrentPoll.setCurrentPoll(id);
-    this.$window.location.href = "/show/" + id;
+    if(joins == 0) {
+      this.alertMessage = "This poll has never been answered.";
+    }
+    else
+      this.$window.location.href = "/show/" + id;
   }
 }
 

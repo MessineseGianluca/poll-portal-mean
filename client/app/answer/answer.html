@@ -7,46 +7,44 @@
     <ul class="questions"
         ng-repeat='question in $ctrl.poll.questions'
         ng-init="quesIndex = $index">
-      <form name="myForm">
-        <li>
-          <h2><small>{{question.text}}</small></h2>
-          <textarea ng-if="question.type == 'a'"
-                    ng-model="$ctrl.answers[$index].content"
-                    ng-maxlength="255"
-                    ng-minlength="1"
-                    name="{{question._id}}"
-                    class="form-control"
-                    ng-required="$ctrl.answers[$index].filled"
-                    placeholder="Insert your answer here..."></textarea>
-          <ul class="options"
-              ng-if="question.type == 'b' || question.type == 'c'"
-              ng-repeat='option in question.options'>
-            <li ng-if="question.type == 'b'">
-              <div class="radio">
-                <label>
-                  <input type="radio"
-                         ng-model="$ctrl.answers[quesIndex].content"
-                         ng-value="option._id"
-                         name="{{question._id}}"
-                         ng-required="$ctrl.answers[$index].filled">
-                  {{option.text}}
-                </label>
-              </div>
-            </li>
-            <li ng-if="question.type == 'c'">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox"
-                         ng-model="$ctrl.answers[quesIndex].content[$index].value"
-                         name="{{question._id}}"
-                         ng-required="required">
-                  {{option.text}}
-                </label>
-              </div>
-            </li>
-          </ul>
-        </li>
-      </form>
+      <li>
+        <h2><small>{{question.text}}</small></h2>
+        <textarea ng-if="question.type == 'a'"
+                  ng-model="$ctrl.answers[$index].content"
+                  ng-maxlength="255"
+                  ng-minlength="1"
+                  name="{{question._id}}"
+                  class="form-control"
+                  ng-required="$ctrl.answers[$index].filled"
+                  placeholder="Insert your answer here..."></textarea>
+        <ul class="options"
+            ng-if="question.type == 'b' || question.type == 'c'"
+            ng-repeat='option in question.options'>
+          <li ng-if="question.type == 'b'">
+            <div class="radio">
+              <label>
+                <input type="radio"
+                       ng-model="$ctrl.answers[quesIndex].content"
+                       ng-value="option._id"
+                       name="{{question._id}}"
+                       ng-required="$ctrl.answers[$index].filled">
+                {{option.text}}
+              </label>
+            </div>
+          </li>
+          <li ng-if="question.type == 'c'">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"
+                       ng-model="$ctrl.answers[quesIndex].content[$index].value"
+                       name="{{question._id}}"
+                       ng-required="required">
+                {{option.text}}
+              </label>
+            </div>
+          </li>
+        </ul>
+      </li>
     </ul>
     <button type="button"
             class="btn btn-primary"

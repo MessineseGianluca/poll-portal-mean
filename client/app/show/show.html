@@ -1,3 +1,26 @@
 <div class="container">
-  <p>{{$ctrl.message}}</p>
+  <div class="row">
+    <h1 class="poll-name">
+      <small>
+        {{$ctrl.poll.title}}
+        <span>(answered {{$ctrl.poll.joins}} times)</span>
+      </small>
+    </h1>
+    <ul class="questions"
+        ng-repeat='question in $ctrl.poll.questions'>
+      <li>
+        <h2><small>{{question.text}}</small></h2>
+        <ul ng-if="question.type == 'a'"
+            ng-repeat="answer in question.answers | limitTo: 5">
+          <li>{{answer.content}}</li>
+        </ul>
+        <ul ng-if="question.type == 'b' || question.type == 'c'"
+            ng-repeat='option in question.options'>
+          <li>
+            {{option.text}}
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
 </div>
