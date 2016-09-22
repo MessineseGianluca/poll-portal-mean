@@ -6,9 +6,10 @@ import routing from './dashboard.routes';
 export class DashboardController {
 
   /*@ngInject*/
-  constructor($http, $q) {
+  constructor($http, $q, $window) {
     this.$http = $http;
     this.$q = $q;
+    this.$window = $window;
   }
 
   $onInit() {
@@ -55,9 +56,16 @@ export class DashboardController {
   }
 
   clickOpened(id) {
-    for(var pollId of this.myAnsweredPollsId) {
-      if(pollId == id) {
-        this.alertMessage = "You have already answered this poll.";
+    if(this.myAnsweredPollsId == '')
+      this.$window.location.href = '/answer/' + id;
+    else {
+      for(var pollId of this.myAnsweredPollsId) {
+        if(pollId == id) {
+          this.alertMessage = "You have already answered this poll.";
+        } else {
+          this.$window.location.href = '/answer/' + id;
+          break;
+        }
       }
     }
   }

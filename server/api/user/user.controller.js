@@ -99,6 +99,21 @@ export function changePassword(req, res, next) {
     });
 }
 
+export function addJoin(req, res, next) {
+  var userId = req.params.id;
+  var pollId = req.body.pollId;
+  return User.findById(userId).exec()
+    .then(user => {
+        user.polls.push(pollId);
+        return user.save()
+          .then(() => {
+            res.status(204).end();
+          })
+          .catch(validationError(res));
+    });
+}
+
+
 /**
  * Get my info
  */

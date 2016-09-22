@@ -53,8 +53,7 @@ User.find({}).remove()
       role: 'admin',
       name: 'Admin',
       email: 'admin@example.com',
-      password: 'admin',
-      polls: ['57d2e7233c6a7e4419780aa9', '57d2e7233c6a7e4419780aa4']
+      password: 'admin'
     })
   });
 /*
