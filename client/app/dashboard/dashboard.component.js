@@ -1,4 +1,3 @@
-
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import routing from './dashboard.routes';
@@ -69,7 +68,10 @@ export class DashboardController {
       }
     }
   }
-
+  clickClosed(id) {
+    //CurrentPoll.setCurrentPoll(id);
+    this.$window.location.href = "/show/" + id;
+  }
 }
 
 export default angular.module('pollPortalMeanApp.dashboard', [uiRouter])

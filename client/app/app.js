@@ -5,7 +5,6 @@ import angular from 'angular';
 import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
-
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
 
@@ -28,6 +27,7 @@ import answer from './answer/answer.component';
 import show from './show/show.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
+import currentPoll from '../components/extra/currentPoll.module';
 
 import './app.css';
 
@@ -38,7 +38,7 @@ angular.module('pollPortalMeanApp', [
 
     // ngValidationMatch,
     _Auth, account, admin, navbar, footer, welcome, constants, util, dashboard,
-    answer, show
+    answer, show, currentPoll
   ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {

@@ -13,7 +13,7 @@ export class ShowController {
   }
 
   $onInit() {
-    this.message="That's a show page";
+    this.message = "That's a show page";
   }
 }
 
