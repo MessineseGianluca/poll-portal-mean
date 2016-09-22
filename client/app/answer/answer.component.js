@@ -22,10 +22,10 @@ export class AnswerController {
         var pollToAnswer = response[0].data;
         var pollsAnsweredByUser = response[1].polls;
         // If poll doesn't exist
-        if(!pollToAnswer) {
+        if(pollToAnswer == '') {
           this.$window.location.href = '/dashboard';
         }
-        /*If logged user has already answered the poll*/
+        //If logged user has already answered the poll
         for(var pollId of pollsAnsweredByUser) {
           if(pollId == pollToAnswer._id)
             this.$window.location.href = '/dashboard';
@@ -37,9 +37,10 @@ export class AnswerController {
           var obj = {
                       quesId: question._id,
                       type: question.type,
-                      content: []
+                      content: ''
                     };
           if(question.type == 'c') {
+            obj.content = new Array();
             for(var index in question.options) {
               obj.content.push({
                 value: false,
@@ -53,7 +54,45 @@ export class AnswerController {
       });
   }
 
-  submitAnswers() {
+  validateInput() {
+    var lengthError = {
+      message:"You have overflown " +
+        "the max length in one or more textboxes.",
+      toCommunicate: false
+    };
+    var notFilledError = {
+      message:"You haven't filled any input fields.",
+      toCommunicate: false
+    };
+
+    for(var question of this.answers) {
+      if(question.type == 'c') {
+        var atLeastOneChecked;
+        /*Check if at least one checkbox is filled*/
+        for(var option of question.content) {
+          if(option.value) {
+            atLeastOneChecked = true;
+            break;
+          }
+        }
+        if(!atLeastOneChecked)
+          notFilledError.toCommunicate = true;
+      } else {
+        if(question.content == '')
+          notFilledError.toCommunicate = true;
+        if(question.content.length >= 255)
+          lengthError.toCommunicate = true;
+      }
+      //If both errors have been caught, immediately return errors
+      if(notFilledError.toCommunicate && lengthError.toCommunicate) {
+        return [notFilledError, lengthError];
+      }
+
+    }
+    return [notFilledError, lengthError];
+  }
+
+  sendData() {
     var i = 0;
     for(var question of this.answers) {
       if(question.type == 'a') {
@@ -113,19 +152,23 @@ export class AnswerController {
      this.$window.location.href = "/dashboard";
   }
 
-/*
-  addThing() {
-    if (this.newThing) {
-      this.$http.post('/api/things', {
-        name: this.newThing
-      });
-      this.newThing = '';
+  submitAnswers() {
+    this.errors = [];
+    var errors = this.validateInput();
+    var send = true;
+    var index = 0;
+    for(var error of errors) {
+      if(error.toCommunicate)
+        send = false;
+      else
+        errors[index].message = '';
+      index++;
     }
+    this.errors = errors;
+    //If no errors have been caught, send data to backend
+    if(send)
+      this.sendData();
   }
-
-  deleteThing(thing) {
-    this.$http.delete('/api/things/' + thing._id);
-  }*/
 }
 
 export default angular.module('pollPortalMeanApp.answer', [uiRouter])

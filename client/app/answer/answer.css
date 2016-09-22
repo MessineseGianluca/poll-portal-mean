@@ -19,3 +19,12 @@ ul.options {
 .checkbox input:focus, .radio input:focus {
   outline: none;
 }
+
+.btn {
+  margin: 25px 40px;
+}
+
+.error {
+  color: red;
+  font-weight: 600;
+}
