@@ -7,17 +7,38 @@
       </small>
     </h1>
     <ul class="questions"
-        ng-repeat='question in $ctrl.poll.questions'>
+        ng-repeat="question in $ctrl.poll.questions"
+        ng-init="quesIndex = $index">
       <li>
         <h2><small>{{question.text}}</small></h2>
-        <ul ng-if="question.type == 'a'"
-            ng-repeat="answer in question.answers | limitTo: 5">
-          <li>{{answer.content}}</li>
-        </ul>
+        <span ng-if="question.type == 'a'">
+          <ul ng-repeat="answer in question.answers |
+                         limitTo: $ctrl.poll.questions[quesIndex].limit">
+            <li>
+              <p class="answer">{{answer.content}}</p>
+            </li>
+          </ul>
+          <p class="showMore"
+             ng-if="$ctrl.poll.questions[quesIndex].limit == $ctrl.defaultLimit"
+             ng-click="$ctrl.changeLimit(quesIndex)">
+            Show more.
+          </p>
+        </span>
         <ul ng-if="question.type == 'b' || question.type == 'c'"
             ng-repeat='option in question.options'>
           <li>
-            {{option.text}}
+            <p class="option">{{option.text}}</p>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped active"
+                   role="progressbar"
+                   aria-valuenow="{{option.percentage}}"
+                   aria-valuemin="0"
+                   qaria-valuemax="100"
+                   style="width: {{option.percentage}}%">
+                <span ng-if="option.percentage">{{option.percentage}}%</span>
+                <span class="zero" ng-if="!option.percentage">0%</span>
+              </div>
+            </div>
           </li>
         </ul>
       </li>
