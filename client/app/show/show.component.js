@@ -5,10 +5,11 @@ import routing from './show.routes';
 export class ShowController {
 
   /*@ngInject*/
-  constructor($http, $q, $stateParams, $window) {
+  constructor($http, $q, $stateParams, $window, $state) {
     this.$http = $http;
     this.$q = $q;
     this.$stateParams = $stateParams;
+    this.$state = $state;
     this.$window = $window;
   }
 
@@ -16,11 +17,15 @@ export class ShowController {
     this.$http.get('/api/polls/' + this.$stateParams.pollId)
       .then(response => {
         this.poll = response.data;
+        //If poll isn't an opened poll
+        if(this.poll.endDate > Date.now() ||
+           this.poll.startDate > Date.now()) {
+          this.$state.go('dashboard', {error: "memt"});
+        }
         var i = 0;
         var j = 0;
-        //Num of answers to show for each question(type 'a')
-        this.defaultLimit = 5;
-        
+        //Num of answers to show for each
+        var defaultLimit = 5;
         for(var question of this.poll.questions) {
           if(question.type == 'b' || question.type == 'c') {
             for(var answer of question.answers) {
@@ -40,11 +45,10 @@ export class ShowController {
           }
           i++;
         }
-        //Set the number of answers to be showed.(question type a)
-        console.log(this.poll);
       });
   }
 
+  //Set the number of answers to be showed.(question type a)
   changeLimit(index) {
     this.poll.questions[index].limit = this.poll.joins;
   }

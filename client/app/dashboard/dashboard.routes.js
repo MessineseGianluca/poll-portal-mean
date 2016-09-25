@@ -7,6 +7,7 @@ export default function routes($stateProvider) {
     url: '/dashboard',
     template: '<dashboard></dashboard>',
     controllerAs: 'user',
-    authenticate: 'user'
+    authenticate: 'user',
+    params: { error: "" }
   });
 };

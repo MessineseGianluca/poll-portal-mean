@@ -5,10 +5,11 @@ import routing from './answer.routes';
 export class AnswerController {
 
   /*@ngInject*/
-  constructor($http, $q, $stateParams, $window, Auth) {
+  constructor($http, $q, $stateParams, $window, Auth, $state) {
     this.$http = $http;
     this.$q = $q;
     this.$stateParams = $stateParams;
+    this.$state = $state;
     this.$window = $window;
     this.Auth = Auth;
   }
@@ -17,18 +18,21 @@ export class AnswerController {
     this.$q.all([
       this.$http.get('/api/polls/' + this.$stateParams.pollId),
       this.Auth.getCurrentUser(),
-    ])
-      .then(response => {
+    ]).then(response => {
         var pollToAnswer = response[0].data;
         var pollsAnsweredByUser = response[1].polls;
-        // If poll doesn't exist
-        if(pollToAnswer == '') {
-          this.$window.location.href = '/dashboard';
+        //If poll isn't an opened poll
+        if(pollToAnswer.endDate < Date.now() ||
+           pollToAnswer.startDate > Date.now()) {
+          this.$state.go('dashboard', { error: "You can't answer poll." });
         }
         //If logged user has already answered the poll
         for(var pollId of pollsAnsweredByUser) {
           if(pollId == pollToAnswer._id)
-            this.$window.location.href = '/dashboard';
+            this.$state.go(
+              'dashboard',
+              { error: "You have just answered that poll." }
+            );
         }
         this.poll = pollToAnswer;
         this.answers = new Array();
@@ -51,6 +55,8 @@ export class AnswerController {
           this.answers.push(obj);
         }
         this.me = response[1];
+      }, err => {
+        this.$state.go('dashboard', { error: "That poll doesn't exist." });
       });
   }
 

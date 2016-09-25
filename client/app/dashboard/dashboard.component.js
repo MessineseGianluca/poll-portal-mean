@@ -5,18 +5,19 @@ import routing from './dashboard.routes';
 export class DashboardController {
 
   /*@ngInject*/
-  constructor($http, $q, $window) {
+  constructor($http, $q, $window, $stateParams) {
     this.$http = $http;
     this.$q = $q;
     this.$window = $window;
+    this.$stateParams = $stateParams;
   }
 
   $onInit() {
     this.$q.all([
       this.$http.get('/api/polls'),
       this.$http.get('/api/users/me')
-    ])
-      .then(response => {
+    ]).then(response => {
+      this.alertMessage = this.$stateParams.error;
       // get all polls
       var polls = response[0].data;
       //get the id of the polls answered by the logged user
@@ -58,14 +59,15 @@ export class DashboardController {
     if(this.myAnsweredPollsId == '')
       this.$window.location.href = '/answer/' + id;
     else {
+      var redirect = true;
       for(var pollId of this.myAnsweredPollsId) {
         if(pollId == id) {
           this.alertMessage = "You have already answered this poll.";
-        } else {
-          this.$window.location.href = '/answer/' + id;
-          break;
+          redirect = false;
         }
       }
+      if(redirect)
+        this.$window.location.href = '/answer/' + id;
     }
   }
   clickClosed(id, joins) {
