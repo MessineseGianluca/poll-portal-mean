@@ -17,10 +17,15 @@ export class ShowController {
     this.$http.get('/api/polls/' + this.$stateParams.pollId)
       .then(response => {
         this.poll = response.data;
-        //If poll isn't an opened poll
-        if(this.poll.endDate > Date.now() ||
-           this.poll.startDate > Date.now()) {
-          this.$state.go('dashboard', {error: "memt"});
+        var end = new Date(this.poll.endDate).getTime();
+        var start = new Date(this.poll.startDate).getTime();
+        //If the poll isn't a closed poll
+        if((start < Date.now() && end > Date.now()) || start > Date.now()) {
+          this.$state.go(
+            'dashboard',
+            {
+              error: "You can't see results of that poll."
+            });
         }
         var i = 0;
         var j = 0;
@@ -45,6 +50,8 @@ export class ShowController {
           }
           i++;
         }
+      }, err => {
+        this.$state.go("dashboard", { error: "That poll doesn't exist." });
       });
   }
 

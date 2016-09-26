@@ -45,7 +45,7 @@ export class DashboardController {
         }
         /* Edit Date in such a readable format */
         poll.endDate = new Date(poll.endDate).toUTCString();
-        poll.startDate = new Date(poll.endDate).toUTCString();
+        poll.startDate = new Date(poll.startDate).toUTCString();
       }
       this.myAnsweredPollsId = joins;
       this.openedPolls = openedPolls;

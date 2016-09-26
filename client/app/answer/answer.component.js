@@ -22,9 +22,15 @@ export class AnswerController {
         var pollToAnswer = response[0].data;
         var pollsAnsweredByUser = response[1].polls;
         //If poll isn't an opened poll
-        if(pollToAnswer.endDate < Date.now() ||
-           pollToAnswer.startDate > Date.now()) {
-          this.$state.go('dashboard', { error: "You can't answer poll." });
+        var end = new Date(pollToAnswer.endDate).getTime();
+        var start = new Date(pollToAnswer.startDate).getTime();
+        //If the poll isn't an opened poll
+        if((start < Date.now() && end < Date.now()) || start > Date.now()) {
+          this.$state.go(
+            'dashboard',
+            {
+              error: "You can't answer that poll."
+            });
         }
         //If logged user has already answered the poll
         for(var pollId of pollsAnsweredByUser) {
