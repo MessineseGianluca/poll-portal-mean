@@ -10,14 +10,14 @@ export default class LoginController {
 
   login(form) {
     this.submitted = true;
-
+    this.errors = {};
     if (form.$valid) {
       this.Auth.login({
           email: this.user.email,
           password: this.user.password
         })
         .then(() => {
-          // Logged in, redirect to home
+          // Logged in, redirect to dashboard
           this.$state.go('dashboard');
         })
         .catch(err => {
