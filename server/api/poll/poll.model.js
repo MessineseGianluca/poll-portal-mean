@@ -27,7 +27,6 @@ var PollSchema = new mongoose.Schema({
   questions: [QuestionSchema]
 });
 
-export default mongoose.model('Answer', AnswerSchema);
-export default mongoose.model('Option', OptionSchema);
-export default mongoose.model('Question', QuestionSchema);
+
+
 export default mongoose.model('Poll', PollSchema);
