@@ -56,7 +56,7 @@ User.find({}).remove()
       password: 'admin'
     })
   });
-/*
+
 Poll.find({}).remove()
   .then(() => {
     Poll.create({
@@ -127,4 +127,4 @@ Poll.find({}).remove()
     .then(() => {
       console.log('finished populating users');
     });
-  });*/
+  });

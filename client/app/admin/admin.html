@@ -4,31 +4,34 @@
     <div class="col-lg-6 col-xs-12">
       <h2 class="centered-text"><small> Modify a poll </small></h1>
       <div class="form-group">
-          <select class="form-control modify-select">
-            <option value="">blabla</option>
-          </select>
-        </label>
+        <select class="form-control"
+                ng-model="$ctrl.selectedPoll"
+                ng-options="poll.title for poll in $ctrl.polls">
+        </select>
       </div>
-      <button class="btn btn-default pull-left" type="button">
+      <button class="btn btn-default pull-left"
+              type="button" ng-click="$ctrl.modifyPoll($ctrl.selectedPoll._id)">
         Modify
       </button>
-      <button class="btn btn-danger pull-right" type="button">
+      <button class="btn btn-danger pull-right" type="button"
+              ng-click="$ctrl.deletePoll($ctrl.selectedPoll._id)">
         Delete
       </button>
     </div>
     <div class="col-lg-6 col-xs-12 centered-text">
       <h2 class="centered-text"><small> Or create a new one</small></h1>
-      <button class="btn btn-default btn-lg">Create</button>
+      <button class="btn btn-default btn-lg"
+              ng-click="$ctrl.createPoll()">Create</button>
     </div>
   </div>
   <h1><small>User control panel</small></h1>
   <ul class="list-group user-list">
-    <li class="list-group-item" ng-repeat="user in admin.users">
+    <li class="list-group-item" ng-repeat="user in $ctrl.users">
 	    <div class="user-info">
 	        <strong>{{user.name}}</strong><br>
 	        <span class="text-muted">{{user.email}}</span>
 	    </div>
-        <a ng-click="admin.delete(user)" class="trash">
+        <a ng-click="$ctrl.deleteUser(user)" class="trash">
           <span class="fa fa-trash fa-2x"></span>
         </a>
     </li>

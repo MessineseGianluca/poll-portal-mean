@@ -18,7 +18,7 @@ import {
 
 import _Auth from '../components/auth/auth.module';
 import account from './account';
-import admin from './admin';
+import admin from './admin/admin.component';
 import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
 import welcome from './welcome/welcome.component';
