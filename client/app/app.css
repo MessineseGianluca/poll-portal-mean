@@ -48,6 +48,8 @@
 @import 'dashboard/dashboard.css';
 @import 'show/show.css';
 @import 'welcome/welcome.css';
+@import 'modify/modify.css';
 @import '../components/footer/footer.css';
 @import '../components/modal/modal.css';
+
 /* endinject */
