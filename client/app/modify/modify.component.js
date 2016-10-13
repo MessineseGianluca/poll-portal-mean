@@ -4,15 +4,31 @@ import uiRouter from 'angular-ui-router';
 
 export class ModifyController {
   /*@ngInject*/
-  constructor($http, $state, $window) {
+  constructor($http, $stateParams) {
     // Use the User $resource to fetch all users
     this.$http = $http;
-    this.$window = $window;
-    this.$state = $state;
+    this.$stateParams = $stateParams;
   }
 
   $onInit() {
+    this.$http.get('/api/polls/' + this.$stateParams.pollId)
+      .then(response => {
+        this.poll = response.data;
+        this.selectedQuestion = this.poll.questions[0];
+      });
+  }
 
+  modifyQuestion(quesId) {
+    console.log(quesId);
+  }
+
+  deleteQuestion(quesId) {
+    this.$http.delete('/api/polls/' + this.poll._id + '/questions/' + quesId);
+    _.remove(this.poll.questions, {
+      _id: quesId
+    });
+    this.logMessage = "Question removed";
+    this.selectedQuestion = this.poll.questions[0];
   }
 }
 

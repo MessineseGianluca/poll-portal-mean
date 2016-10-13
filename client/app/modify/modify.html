@@ -1,1 +1,22 @@
-"Here a modify page"
+<div class="container">
+  <h1 class="centered-text"><small>{{$ctrl.poll.title}}</small></h1>
+  <div class="col-lg-6 col-xs-12">
+    <p>{{$ctrl.logMessage}}</p>
+    <h2 class="centered-text"><small> Modify Question: </small></h1>
+    <div class="form-group">
+      <select class="form-control"
+              ng-model="$ctrl.selectedQuestion"
+              ng-options="question.text for question in $ctrl.poll.questions">
+      </select>
+    </div>
+    <button class="btn btn-default pull-left"
+            type="button"
+            ng-click="$ctrl.modifyQuestion($ctrl.selectedQuestion._id)">
+      Modify
+    </button>
+    <button class="btn btn-danger pull-right" type="button"
+            ng-click="$ctrl.deleteQuestion($ctrl.selectedQuestion._id)">
+      Delete
+    </button>
+  </div>
+</div>
