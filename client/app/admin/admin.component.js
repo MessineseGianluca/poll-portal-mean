@@ -30,6 +30,7 @@ export class AdminController {
 
   modifyPoll(pollId) {
     this.$window.location.href = '/admin/modify/' + pollId;
+    this.$modifyQuestion = true;
   }
 
   createPoll() {

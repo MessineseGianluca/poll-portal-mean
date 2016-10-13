@@ -11,6 +11,7 @@ export class ModifyController {
   }
 
   $onInit() {
+    this.showModifyQuestionPanel = false;
     this.$http.get('/api/polls/' + this.$stateParams.pollId)
       .then(response => {
         this.poll = response.data;
@@ -19,7 +20,11 @@ export class ModifyController {
   }
 
   modifyQuestion(quesId) {
-    console.log(quesId);
+    this.showModifyQuestionPanel = true;
+  }
+
+  hideQuestionPanel() {
+    this.showModifyQuestionPanel = false;
   }
 
   deleteQuestion(quesId) {
