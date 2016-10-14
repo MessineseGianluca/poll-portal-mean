@@ -6,3 +6,15 @@
 .btm-mrg {
   margin-bottom: 20%;
 }
+
+.edit-poll, .add-question {
+  font-size: 30px;
+}
+
+.edit-ques, .add-option {
+  font-size: 25px;
+}
+
+.edit-option, .delete-option {
+  font-size: 18px;
+}

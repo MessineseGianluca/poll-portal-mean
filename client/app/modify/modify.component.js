@@ -27,6 +27,10 @@ export class ModifyController {
     this.showModifyQuestionPanel = false;
   }
 
+  editOption(optionId, newValue) {
+    console.log(optionId, newValue);
+  }
+
   deleteQuestion(quesId) {
     this.$http.delete('/api/polls/' + this.poll._id + '/questions/' + quesId);
     _.remove(this.poll.questions, {

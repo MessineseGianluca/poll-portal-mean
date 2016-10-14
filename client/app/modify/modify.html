@@ -1,9 +1,17 @@
 <div class="container">
-  <h1 class="centered-text"><small>{{$ctrl.poll.title}}</small></h1>
+  <h1 class="centered-text">
+    <small>{{$ctrl.poll.title}}</small>
+    <span ng-click="$ctrl.editPoll()"
+          class="glyphicon glyphicon-cog edit-poll"></span>
+    <span ng-click="$ctrl.addQuestion()"
+          class="glyphicon glyphicon-cog add-question"></span>
+  </h1>
   <div class="row btm-mrg">
     <div class="col-lg-6 col-xs-12">
       <p class="log-message">{{$ctrl.logMessage}}</p>
-      <h2 class="centered-text"><small> Modify Question: </small></h1>
+      <h2 class="centered-text">
+        <small> Modify Question: </small>
+      </h1>
       <div class="form-group">
         <select class="form-control"
                 ng-model="$ctrl.selectedQuestion"
@@ -23,9 +31,21 @@
     </div>
     <div class="col-lg-6 col-xs-12" ng-if="$ctrl.showModifyQuestionPanel">
       <p class="log-message">{{$ctrl.logMessageQuestionPanel}}</p>
-      <h2><small>{{$ctrl.selectedQuestion.text}}</small></h2>
+      <h2>
+        <small>{{$ctrl.selectedQuestion.text}}</small>
+        <span ng-click="$ctrl.editQuestion()"
+              class="glyphicon glyphicon-cog edit-ques"></span>
+        <span ng-click="$ctrl.addOption()"
+              class="glyphicon glyphicon-cog add-option"></span>
+      </h2>
       <ul ng-repeat="option in $ctrl.selectedQuestion.options">
-        <li>{{option.text}}</li>
+        <li>
+          {{option.text}}
+          <span ng-click="$ctrl.editOption(option._id, option.text)"
+                class="glyphicon glyphicon-cog edit-option"></span>
+          <span ng-click="$ctrl.deleteOption(option._id)"
+                class="glyphicon glyphicon-cog delete-option"></span>
+        </li>
       </ul>
     </div>
   </div>
