@@ -18,3 +18,7 @@
 .edit-option, .delete-option {
   font-size: 18px;
 }
+
+.option-list li {
+  margin: 20px 0;
+}

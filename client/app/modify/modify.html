@@ -2,9 +2,9 @@
   <h1 class="centered-text">
     <small>{{$ctrl.poll.title}}</small>
     <span ng-click="$ctrl.editPoll()"
-          class="glyphicon glyphicon-cog edit-poll"></span>
+          class="glyphicon glyphicon-pencil edit-poll"></span>
     <span ng-click="$ctrl.addQuestion()"
-          class="glyphicon glyphicon-cog add-question"></span>
+          class="glyphicon glyphicon-plus add-question"></span>
   </h1>
   <div class="row btm-mrg">
     <div class="col-lg-6 col-xs-12">
@@ -34,19 +34,29 @@
       <h2>
         <small>{{$ctrl.selectedQuestion.text}}</small>
         <span ng-click="$ctrl.editQuestion()"
-              class="glyphicon glyphicon-cog edit-ques"></span>
-        <span ng-click="$ctrl.addOption()"
-              class="glyphicon glyphicon-cog add-option"></span>
+              class="glyphicon glyphicon-pencil edit-ques"></span>
       </h2>
-      <ul ng-repeat="option in $ctrl.selectedQuestion.options">
+      <ul class="option-list"
+          ng-repeat="option in $ctrl.selectedQuestion.options">
         <li>
           {{option.text}}
-          <span ng-click="$ctrl.editOption(option._id, option.text)"
-                class="glyphicon glyphicon-cog edit-option"></span>
+          <span ng-click="$ctrl.editOption(option._id, newText)"
+                aria-hidden="true"
+                class="glyphicon glyphicon-pencil edit-option"></span>
           <span ng-click="$ctrl.deleteOption(option._id)"
-                class="glyphicon glyphicon-cog delete-option"></span>
+                aria-hidden="true"
+                class="glyphicon glyphicon-remove delete-option"></span>
         </li>
       </ul>
+      <div class="form-group">
+        <label for="write-text">Insert the new option text here </label>
+        <input type="text" class="form-control" id="write-text-text">
+      </div>
+      <button class="btn btn-default pull-right"
+              ng-click="$ctrl.addOption()"
+              type="button">
+        Add-option
+      </button>
     </div>
   </div>
 </div>
